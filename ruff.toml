@@ -1,0 +1,13 @@
+target-version = "py311"
+line-length = 120
+exclude = [".venv", ".git", "__pycache__", "*.pyc"]
+
+[format]
+preview = true
+
+[lint]
+select = ["E", "F", "I", "W", "UP"]
+ignore = [
+  "E501",
+  "E402",
+]

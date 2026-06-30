@@ -1,0 +1,19 @@
+{
+  "file-explorer": true,
+  "global-search": true,
+  "switcher": true,
+  "graph": true,
+  "backlink": true,
+  "outgoing-link": true,
+  "tag-pane": true,
+  "command-palette": true,
+  "markdown-importer": true,
+  "random-note": true,
+  "outline": true,
+  "word-count": true,
+  "audio-recorder": true,
+  "workspaces": true,
+  "file-recovery": true,
+  "publish": false,
+  "sync": false
+}

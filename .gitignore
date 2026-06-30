@@ -1,0 +1,146 @@
+# ──────────────────────────────────────────────
+# HardWorkres — .gitignore
+# ──────────────────────────────────────────────
+
+# ── Python ────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+dist/
+build/
+*.egg
+pip-log.txt
+pip-delete-this-directory.txt
+
+# ── Virtual environments ──────────────────────
+venv/
+.venv/
+.venv.*/
+env/
+ENV/
+*.venv*/
+
+# ── Environment variables & secrets ───────────
+.env
+.env.*
+!.env.example
+secrets/
+credentials/
+keys/
+apikeys/
+
+# ── Databases ─────────────────────────────────
+*.db
+*.sqlite
+*.sqlite3
+*.db-journal
+*.db-wal
+*.db-shm
+
+# ── Logs ──────────────────────────────────────
+logs/
+*.log
+
+# ── Vector indexes & embeddings ───────────────
+*.faiss
+*.faiss.tmp
+*.pkl
+faiss_index/
+vectorstore/data/
+embeddings/
+
+# ── Runtime data ──────────────────────────────
+data/
+.master_key
+settings.json
+user_data/
+memory_data/
+chat_history/
+conversations/
+exports/
+
+# ── Agent & workspace ─────────────────────────
+.agent_backups/
+workspace/
+.opencode_workspace/
+
+# ── IDE & OS ──────────────────────────────────
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.*.sw?
+.project
+.classpath
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# ── Backups ───────────────────────────────────
+backup/
+backups/
+*.bak
+*.backup
+*.old
+
+# ── Caches ────────────────────────────────────
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+cache/
+*.cache
+temp/
+*.temp
+
+# ── Test & coverage ──────────────────────────
+htmlcov/
+.coverage
+.coverage.*
+coverage/
+nosetests.xml
+coverage.xml
+*.cover
+
+# ── Build artifacts ──────────────────────────
+wheelhouse/
+*.whl
+*.tar.gz
+*.manifest
+*.spec
+artifacts/
+
+# ── Documentation & analysis (generated) ──────
+project_documentation/
+architecture/
+audits/
+reports/
+generated_docs/
+
+# ── Jupyter ───────────────────────────────────
+.ipynb_checkpoints/
+*.ipynb
+
+# ── Docker ────────────────────────────────────
+.docker/
+docker-compose.override.yml
+
+# ── Temp / lock files ─────────────────────────
+~$*
+*.tmp
+*.lock
+crash_log.txt
+
+# ── Screenshots & visual assets ──────────────
+screenshots/
+chatgpt.png
+take_screenshots.py

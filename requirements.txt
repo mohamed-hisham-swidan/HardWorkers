@@ -1,0 +1,52 @@
+# ── Core ───────────────────────────────────────────────
+flet>=0.85.0
+requests>=2.32.0
+urllib3>=2.2.0
+numpy>=1.26.0
+tiktoken>=0.7.0
+pillow>=10.4.0
+pywin32>=306          # Windows clipboard access (Ctrl+V image paste)
+pyperclip>=1.11.0
+
+# ── Vector Store ──────────────────────────────────────
+faiss-cpu>=1.8.0
+# sentence-transformers>=2.2.0        # optional — lazy-loaded on demand
+
+# ── UI / Diagnostics ──────────────────────────────────
+psutil>=6.0.0
+
+# ── Voice / Speech ────────────────────────────────────
+SpeechRecognition>=3.10.0
+pyttsx3>=2.90
+# edge-tts>=7.2.0                    # optional — for edge TTS
+
+# ── Document Import ───────────────────────────────────
+pypdf>=4.0.0
+python-docx>=1.1.0
+beautifulsoup4>=4.12.0
+pyyaml>=6.0
+
+# ── Vision / Image ────────────────────────────────────
+pytesseract>=0.3.10
+# opencv-python>=4.8.0               # optional — for advanced image ops
+
+# ── Training Pipeline ─────────────────────────────────
+# transformers>=4.36.0                # optional — model training
+# torch>=2.1.0                        # optional — model training
+# datasets>=2.16.0                    # optional — model training
+# llama-cpp-python>=0.2.0             # optional — local GGUF inference
+
+# ── Security ─────────────────────────────────────────
+cryptography>=42.0.0
+
+# ── API Server (FastAPI) ──────────────────────────────
+fastapi>=0.115.0
+uvicorn[standard]>=0.30.0
+python-jose[cryptography]>=3.3.0
+python-multipart>=0.0.12
+pydantic>=2.9.0
+pydantic-settings>=2.5.0
+websockets>=13.0
+
+# ── Testing ───────────────────────────────────────────
+pytest>=8.0.0
