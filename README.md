@@ -46,7 +46,7 @@ HardWorkres is a professional AI desktop application that combines local and clo
 
 ```bash
 # Clone
-git clone https://github.com/yourusername/hardworkers.git
+git clone https://github.com/mohamed-hisham-swidan/hardworkers.git
 cd hardworkers
 
 # Virtual environment (recommended)
