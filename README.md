@@ -146,8 +146,8 @@ Being upfront about what's not finished yet, instead of letting users discover i
 - [x] Voice I/O
 - [x] Vision / image understanding
 - [x] Autonomous agents
-- [x] Obsidian integration
-- [x] Training pipeline (LoRA / GGUF)
+- [ ] Obsidian integration
+- [ ] Training pipeline (LoRA / GGUF)
 - [ ] Wire up the "Change Model" toolbar action
 - [ ] Finish OCR pipeline wiring
 - [ ] Remove the unused legacy VoiceController
