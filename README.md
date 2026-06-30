@@ -13,11 +13,11 @@
 
 ## Screenshot
 
-> _Add a real screenshot or short GIF of the app here before publishing — e.g. `docs/images/main-window.png`. A visual is usually the first thing that makes a visitor stay on a README._
 
-```md
+
+
 ![Main Window](docs/images/main-window.png)
-```
+
 
 ---
 
