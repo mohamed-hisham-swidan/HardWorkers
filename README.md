@@ -1,37 +1,54 @@
-# HardWorkres
+# HardWorkers
 
 > AI-powered desktop assistant with semantic memory, multi-model chat, voice I/O, vision understanding, and autonomous agents.
 
-[![Python](https://img.shields.io/badge/python-3.11%2B-blue?logo=python)]()
-[![Flet](https://img.shields.io/badge/flet-0.85.3-blue?logo=flutter)]()
-[![License](https://img.shields.io/badge/license-MIT-green)]()
-[![Code style](https://img.shields.io/badge/code%20style-ruff-261230)]()
+![Python](https://img.shields.io/badge/python-3.11%2B-blue?logo=python)
+![Flet](https://img.shields.io/badge/flet-0.85.3-blue?logo=flutter)
+![License](https://img.shields.io/badge/license-MIT-green)
+![Code style](https://img.shields.io/badge/code%20style-ruff-261230)
+![Status](https://img.shields.io/badge/status-active%20development-brightgreen)
+![Tests](https://img.shields.io/badge/tests-295%20passing-success)
+
+---
+
+## Screenshot
+
+> _Add a real screenshot or short GIF of the app here before publishing — e.g. `docs/images/main-window.png`. A visual is usually the first thing that makes a visitor stay on a README._
+
+```md
+![Main Window](docs/images/main-window.png)
+```
 
 ---
 
 ## Overview
 
-HardWorkres is a professional AI desktop application that combines local and cloud AI models, long-term semantic memory, voice input/output, vision analysis, and extensible agent/training pipelines — all in a ChatGPT-inspired interface built with [Flet](https://flet.dev).
+HardWorkers is a desktop AI application that combines local and cloud AI models, long-term semantic memory, voice input/output, vision analysis, and an agent/automation pipeline — in a ChatGPT-style interface built with [Flet](https://flet.dev).
 
 **Supported providers:** Ollama (local), OpenAI, Anthropic, Google Gemini, Groq, OpenRouter, Together AI, DeepSeek, and any OpenAI-compatible API.
 
 ---
 
-## Features
+## Architecture
 
-- **Multi-Model Chat** — Use local Ollama models and cloud APIs side by side, with intelligent content-based routing
-- **Semantic Memory** — FAISS vector store with sentence-transformers embeddings, global and per-chat facts, conversation summarization
-- **Voice I/O** — Speech-to-text and text-to-speech with auto language detection (Arabic/English)
-- **Vision** — Paste or attach images; automatic vision model detection and OCR
-- **Autonomous Agents** — Observe-Analyze-Plan-Execute-Verify lifecycle with file I/O and code analysis tools
-- **Workspaces** — Isolated environments with custom model, router, and memory profiles
-- **Model Management** — Browsing, registration, cloning, and testing for Ollama and API models
-- **Knowledge Engine** — Concept extraction, relationship mapping, and backlink generation
-- **Obsidian Integration** — Read, write, and structure Obsidian vault notes programmatically
-- **Training Pipeline** — LoRA fine-tuning with GGUF support and LM Studio/Ollama adapters
-- **Extensible** — DI container, event bus, plugin-style subsystems (QA validators, domain experts)
-- **FastAPI Server** — REST + WebSocket API with JWT auth (for custom frontends)
-- **React Frontend** — (In development) Vite + TypeScript + TanStack Query + Zustand
+```
+                ┌──────────────────────┐
+                │   ui/main_window.py   │  Flet desktop UI
+                └──────────┬───────────┘
+                           │
+                ┌──────────▼───────────┐
+                │   app/application.py  │  DI Container (16 services)
+                └──────────┬───────────┘
+                           │
+   ┌──────────┬────────────┼────────────┬──────────┐
+   ▼          ▼            ▼            ▼          ▼
+Database   Memory       AI Providers   Voice      Vision
+(SQLite)   (FAISS)    (Ollama + 18 APIs) (TTS/STT) (OCR/Vision)
+   │
+   ├── run_api.py   → FastAPI REST/WebSocket server (8 routers)
+   ├── run_web.py   → same Flet UI served in browser
+   └── frontend/    → React + Vite SPA (Chat / Workspaces / Login)
+```
 
 ---
 
@@ -62,16 +79,103 @@ python main.py
 ```
 
 For the API server: `python run_api.py`
-
 For web mode: `python run_web.py`
 
 See [INSTALL.md](INSTALL.md) for detailed setup, including optional dependencies for voice, vision, and training.
 
 ---
 
+## Features
+
+These are confirmed implemented and working (verified against the internal feature audit).
+
+### Core Platform
+- Flet desktop UI, FastAPI REST/WebSocket server, and an early-stage React SPA (Chat, Workspaces, Login pages) sharing the same backend
+- DI container, event bus (pub/sub), Pydantic-based config and settings persistence
+- Dark/Light/System theming, rotating file + console logging
+
+### Chat
+- Multi-provider chat (Ollama + 18 cloud API presets) with automatic or manual model routing
+- Streaming responses, message editing, copy-to-clipboard, per-message text-to-speech
+- Markdown/GFM rendering with code highlighting, token counting with history truncation
+- Chat search, date grouping, pinning, and memory-aware system prompts
+
+### Memory & Knowledge
+- FAISS-based semantic memory with importance-scored retrieval
+- Per-chat facts, auto-summarization, global user facts
+- Knowledge extraction, concept analysis, relationship mapping, and backlink generation
+
+### Voice
+- Speech-to-text and text-to-speech with caching, language detection, and a waveform/recording indicator
+
+### Vision
+- Image paste/attach with automatic vision-model fallback and clipboard support (PIL, with a Windows-specific clipboard fallback)
+
+### Autonomous Agents
+- Full Observe–Analyze–Plan–Execute–Verify(OAPERVR) workflow with file I/O and code-analysis tools, cancellable streaming runs, and a live activity feed
+
+### Obsidian Integration
+- Vault reading, note generation, and structured import, wired with failure-tolerant startup
+
+### Training Pipeline
+- Dataset preparation, document import, LoRA fine-tune prep, and GGUF/LM Studio/Ollama adapters
+
+### Model Management
+- Ollama model creation/cloning and API model registration, with per-provider connection testing
+
+---
+
+## Known Limitations
+
+Being upfront about what's not finished yet, instead of letting users discover it themselves:
+
+- **"Change Model" button** in the toolbar currently shows a "not implemented yet" message — switch models from Settings instead.
+- **OCR** (`pytesseract`) is a declared dependency but isn't wired into the UI yet.
+- There's a duplicate, unused `VoiceController` implementation (~300 lines) left in the codebase; the app actually uses `MicController`. It will be removed or merged.
+- The following subsystems are fully implemented in code but currently have **no automated test coverage**: vision pipeline, FastAPI routers, training pipeline, knowledge engine, expert/QA system, FAISS vector store, and the encryption utilities.
+
+---
+
+## Roadmap
+
+```md
+- [x] Desktop UI (Flet)
+- [x] FastAPI REST/WebSocket server
+- [x] Multi-provider chat (Ollama + 18 cloud APIs)
+- [x] Semantic memory (FAISS)
+- [x] Voice I/O
+- [x] Vision / image understanding
+- [x] Autonomous agents
+- [x] Obsidian integration
+- [x] Training pipeline (LoRA / GGUF)
+- [ ] Wire up the "Change Model" toolbar action
+- [ ] Finish OCR pipeline wiring
+- [ ] Remove the unused legacy VoiceController
+- [ ] Test coverage for vision, API, training, knowledge, experts/QA, vector store
+- [ ] Polish the React web UI
+- [ ] Packaged releases (Windows/macOS/Linux binaries)
+- [ ] Plugin marketplace
+- [ ] Mobile companion app
+- [ ] MCP (Model Context Protocol) support
+```
+
+---
+
+## Testing
+
+295 tests across 12 files — agent runner/context, database (integration, real SQLite), event bus (schema + versioning), domain models, audio/TTS (including concurrency/stress), settings persistence, utilities, and UI immutability. No skeleton tests; all real assertions.
+
+```bash
+pytest
+```
+
+Not yet covered (see [Known Limitations](#known-limitations)): vision, FastAPI routers, training pipeline, knowledge engine, experts/QA, vector store, encryption.
+
+---
+
 ## Configuration
 
-Configuration is loaded from environment variables or `.env` file. Copy `.env.example` to `.env` and customize:
+Configuration is loaded from environment variables or a `.env` file. Copy `.env.example` to `.env` and customize:
 
 ```env
 OLLAMA_BASE_URL=http://localhost:11434
@@ -98,7 +202,7 @@ hardworkers/
 ├── database/         # SQLite connection, migrations, repositories
 ├── docs/             # Architecture documentation
 ├── experts/          # Domain expert modules
-├── frontend/         # React + Vite web UI (in development)
+├── frontend/         # React + Vite web UI (early stage)
 ├── knowledge/        # Knowledge extraction & relationship mapping
 ├── memory/           # Semantic memory & summarization
 ├── models/           # Domain data models & enums
@@ -157,19 +261,13 @@ Optional: `transformers`, `torch`, `datasets` for training; `opencv-python` for 
 
 We welcome contributions! See [CONTRIBUTING.md](CONTRIBUTING.md) for development setup, code style, and PR process.
 
----
-
 ## Changelog
 
 See [CHANGELOG.md](CHANGELOG.md) for version history.
 
----
-
 ## Security
 
 See [SECURITY.md](SECURITY.md) for reporting vulnerabilities.
-
----
 
 ## License
 
